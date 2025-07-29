@@ -32,6 +32,8 @@ CREATE DATABASE example2;
     );
 */
 CREATE DATABASE school;
+
+			-- db명.컬럼명
 CREATE TABLE `school`.`student` ( -- 백틱(`) 사용
 		student_id int,
         student_name char(8),	-- 학생이름 (문자, 최대 8자리)
