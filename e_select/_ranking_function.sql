@@ -52,7 +52,7 @@ GROUP BY
         ORDER BY 열
     )
     
-    - 윈도 함수: ROW_NUMBER(), RANK(), DENSE_RANK(), SUM(), AVG() 등
+    - 윈도 함수: ROW_NUMBER(), RANK(), DENSE_RANK(), SUM(), AVG(), PARTITION BY등
 		>> DB 의 행 단위 계산시, 그룹 전체가 아닌 윈도(Window)라고 불리는 범위 내에서의 집계나 순위 연산
         
 	- PARTITION BY (선택)

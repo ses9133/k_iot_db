@@ -45,13 +45,35 @@ VALUES
     ('LG 스탠바이미', 530000, 3),
     ('LG 트롬 오브제컬렉션 ', 2850000, 3);
     
+    
 -- 브랜드별 최고가 Top3 상품 추출
 SELECT
-	RANK() 
+	ROW_NUMBER() OVER (PARTITION BY B.brand_id ORDER BY P.price DESC) AS `number`,
+    B.brand_id,
+    B.brand_name,
+    P.product_name,
+    P.price
 FROM
-	products P
-    JOIN brands B
-    ON P.brand_id = B.brand_id
-GROUP BY
-	P.brand_id;
+	brands B
+		JOIN products P
+        ON B.brand_id = P.brand_id;
+
+-- 전체 쿼리
+SELECT *
+FROM (
+	SELECT
+		ROW_NUMBER() OVER (PARTITION BY B.brand_id ORDER BY P.price DESC) AS `number`,
+		B.brand_id,
+		B.brand_name,
+		P.product_name,
+		P.price
+	FROM
+		brands B
+			JOIN products P
+			ON B.brand_id = P.brand_id
+) AS ranked_products
+WHERE 
+	ranked_products.number <= 3
+ORDER BY 
+	ranked_products.brand_id, ranked_products.number;
     
